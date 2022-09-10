@@ -28,6 +28,7 @@ import { getCharacterData } from "../../redux/thunks/AppThunk";
 import ListView from "../../components/list-view";
 import ActivityIndicator from "../../components/activity-indicator";
 import SearchBar from "../../components/search-bar";
+import Pagination from "../../components/pagination";
 
 function HomeScreen({ navigation }) {
   // useDispatch
@@ -115,6 +116,18 @@ function HomeScreen({ navigation }) {
           <Text style={styles.error_fetching_data_style}>
             {errorFetchingData}
           </Text>
+        ) : null}
+
+        {/* Pagination */}
+        {searchBarText.length === 0 ? (
+          <Pagination
+            currentPage={pageIndex}
+            totalPages={characterData?.info?.pages}
+            next={characterData?.info?.next}
+            previous={characterData?.info?.prev}
+            setPageIndex={setPageIndex}
+            dispatch={dispatch}
+          />
         ) : null}
 
         {/* List View */}

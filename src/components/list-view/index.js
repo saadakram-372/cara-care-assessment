@@ -8,9 +8,6 @@ import {
   Image,
 } from "react-native";
 
-// Libraries
-import FastImage from "react-native-fast-image";
-
 // Images
 import Images from "../../../assets/images";
 
@@ -18,14 +15,12 @@ import Images from "../../../assets/images";
 import colors from "../../theme/colors";
 
 // Components
-import Pagination from "../pagination";
 import FlatListComponent from "../flat-list";
 import VerticalDivider from "../dividers/vertical-divider";
 import spacing from "../../theme/spacing";
 
 function ListView(props) {
-  const { data, pageIndex, setPageIndex, dispatch, searchBarText, loader } =
-    props;
+  const { data, searchBarText, loader } = props;
 
   /**
    * Function when an item from the list view is clicked
@@ -122,18 +117,6 @@ function ListView(props) {
 
   return (
     <View>
-      {/* Pagination */}
-      {searchBarText.length === 0 ? (
-        <Pagination
-          currentPage={pageIndex}
-          totalPages={data?.info?.pages}
-          next={data?.info?.next}
-          previous={data?.info?.prev}
-          setPageIndex={setPageIndex}
-          dispatch={dispatch}
-        />
-      ) : null}
-
       {/* List View */}
       <View
         style={styles.flat_list_view_style(
