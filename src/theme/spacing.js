@@ -8,6 +8,7 @@ const spacing = {
   huge: 32,
   hugePlus: 48,
   headerHidden: "15%",
+  textMidScreen: "50%",
 };
 
 export default spacing;
