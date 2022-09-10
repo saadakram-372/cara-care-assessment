@@ -18,9 +18,12 @@ import colors from "../../theme/colors";
 import FlatListComponent from "../flat-list";
 import VerticalDivider from "../dividers/vertical-divider";
 import spacing from "../../theme/spacing";
+import { SCREEN_WIDTH } from "../../utils";
+import { VIEW_TYPE_CONSTANTS } from "../../constants/Strings";
+import HorizontalDivider from "../dividers/horizontal-divider";
 
-function ListView(props) {
-  const { data, searchBarText, loader } = props;
+function GridView(props) {
+  const { data, searchBarText, loader, viewType } = props;
 
   /**
    * Function when an item from the list view is clicked
@@ -65,15 +68,10 @@ function ListView(props) {
           <View style={styles.titleSubtitleView}>
             {/* Title */}
             {title ? (
-              <Text style={styles.title_style}>Name: {title}</Text>
+              <Text style={styles.title_style}>{title}</Text>
             ) : (
               <View style={{ marginTop: 8 }}></View>
             )}
-
-            {/* Subtitle */}
-            <Text style={styles.sub_title_style}>
-              Episode: {first_seen_episode}
-            </Text>
           </View>
 
           {/* Bottom icon view */}
@@ -84,11 +82,11 @@ function ListView(props) {
               <Text style={styles.icon_text_style}>{status}</Text>
             </View>
 
-            {/* Vertical divider */}
-            <VerticalDivider
-              backgroundColor="#FFFFFF33"
-              width={2}
-              height={24}
+            {/* Horizontal divider */}
+            <HorizontalDivider
+              width="100%"
+              height={2}
+              backgroundColor={colors.silverChalice}
             />
 
             {/* Second column */}
@@ -97,11 +95,11 @@ function ListView(props) {
               <Text style={styles.icon_text_style}>{location.name}</Text>
             </View>
 
-            {/* Vertical divider */}
-            <VerticalDivider
-              backgroundColor="#FFFFFF33"
-              width={2}
-              height={24}
+            {/* Horizontal divider */}
+            <HorizontalDivider
+              width="100%"
+              height={2}
+              backgroundColor={colors.silverChalice}
             />
 
             {/* Third column */}
@@ -120,14 +118,16 @@ function ListView(props) {
       {/* List View */}
       <View
         style={styles.flat_list_view_style(
-          searchBarText.length == 0 ? spacing.huge : 0
+          viewType === VIEW_TYPE_CONSTANTS.LIST && searchBarText.length == 0
+            ? spacing.headerHidden
+            : spacing.mediumPlus
         )}
       >
         <FlatListComponent
           data={data?.results}
           listEmptyText={loader ? " " : "No data found"}
           renderItem={renderItem}
-          numCols={0}
+          numCols={3}
         />
       </View>
     </View>
@@ -137,6 +137,7 @@ function ListView(props) {
 const styles = StyleSheet.create({
   list_item_view: {
     marginTop: spacing.mediumPlus,
+    width: SCREEN_WIDTH / 3,
   },
   flat_list_view_style: (marginBottom) => ({
     marginTop: spacing.mediumPlus,
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
   }),
   image_background_style: {
     height: 200,
-    width: "100%",
+    width: SCREEN_WIDTH / 3.45,
     marginBottom: spacing.mediumPlus,
   },
   overlay: {
@@ -176,32 +177,32 @@ const styles = StyleSheet.create({
   },
   bottom_icon_view_style: {
     width: "100%",
-    flexDirection: "row",
     position: "absolute",
     justifyContent: "space-between",
     bottom: spacing.none,
-    marginBottom: spacing.mediumPlus,
     zIndex: 1,
-    paddingHorizontal: spacing.mediumPlus,
+    paddingHorizontal: spacing.tiny,
   },
   icon_style: {
-    marginBottom: spacing.smaller,
-    marginRight: spacing.smaller,
+    marginRight: spacing.tiny,
     width: 16,
     height: 16,
     tintColor: colors.white,
+    alignSelf: "center",
   },
   icon_text_view_style: {
+    flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    alignSelf: "center",
+    margin: spacing.smaller,
   },
   icon_text_style: {
     color: "#FFFFFF",
     fontWeight: "500",
     fontSize: 12,
-    textAlign: "center",
+    textAlign: "left",
+    alignSelf: "center",
+    width: "90%",
   },
 });
 
-export default ListView;
+export default GridView;

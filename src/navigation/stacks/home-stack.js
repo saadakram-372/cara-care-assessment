@@ -10,6 +10,7 @@ import FilterScreen from "../../screens/filter";
 import HeaderLeft from "../../components/headers/header-left";
 import headerRight from "../../components/headers/header-right";
 import colors from "../../theme/colors";
+import { VIEW_TYPE_CONSTANTS } from "../../constants/Strings";
 
 const HomeStack = createStackNavigator();
 
@@ -36,7 +37,8 @@ const HomeStackScreens = () => {
           headerTitleAlign: "center",
           headerTitle: "",
           headerLeft: () => HeaderLeft(),
-          headerRight: () => headerRight({ navigation }),
+          headerRight: () =>
+            headerRight({ navigation, viewType: VIEW_TYPE_CONSTANTS.NONE }),
         })}
       />
 

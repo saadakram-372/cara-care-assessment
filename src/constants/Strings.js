@@ -14,3 +14,9 @@ export const FILTER_SCREEN_CONSTANTS = {
   FIRST_SECTION_TITLE: "Status",
   FILTER_STATUS_KEYS: ["Alive", "Dead", "Unknown"],
 };
+
+export const VIEW_TYPE_CONSTANTS = {
+  LIST: "List",
+  GRID: "Grid",
+  NONE: "None",
+};

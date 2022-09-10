@@ -5,11 +5,12 @@ import colors from "../../theme/colors";
 import spacing from "../../theme/spacing";
 
 function FlatListComponent(props) {
-  const { data, renderItem, listEmptyText } = props;
+  const { data, renderItem, listEmptyText, numCols } = props;
 
   return (
     <FlatList
       data={data}
+      numColumns={numCols}
       renderItem={renderItem}
       removeClippedSubviews={true}
       showsVerticalScrollIndicator={false}

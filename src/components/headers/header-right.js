@@ -1,10 +1,14 @@
 import React from "react";
-import { View, Image, StyleSheet, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 // Icons
 import Entypo from "react-native-vector-icons/Entypo";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+// Constants
+import { VIEW_TYPE_CONSTANTS } from "../../constants/Strings";
+
+// Colors
 import colors from "../../theme/colors";
 
 // Spacing
@@ -37,30 +41,34 @@ const getFilterIcon = ({ navigation }) => {
  * @param {string} viewType
  * @returns
  */
-const getViewTypeIcon = ({ viewType }) => {
+const getViewTypeIcon = ({ onClick, iconTextView }) => {
   return (
-    <TouchableOpacity activeOpacity={0.7}>
-      {viewType === "grid" ? (
+    <TouchableOpacity activeOpacity={0.7} onPress={onClick}>
+      {iconTextView()}
+      {/* {viewType === VIEW_TYPE_CONSTANTS.LIST ? (
         <>
           <Entypo size={32} name="grid" style={styles.icon_style} />
-          <Text style={styles.text_style}>Grid</Text>
+          <Text style={styles.text_style}>{VIEW_TYPE_CONSTANTS.GRID}</Text>
         </>
       ) : (
         <>
           <Entypo size={32} name="list" style={styles.icon_style} />
-          <Text style={styles.text_style}>List</Text>
+          <Text style={styles.text_style}>{VIEW_TYPE_CONSTANTS.LIST}</Text>
         </>
-      )}
+      )} */}
     </TouchableOpacity>
   );
 };
 
-function headerRight({ navigation, viewType }) {
+function headerRight({ navigation, viewType, onClick, iconTextView }) {
+  console.log("VIEWtyPE: ", viewType);
+
   return (
     <View style={styles.icon_view_style}>
       {getFilterIcon({ navigation })}
-
-      {getViewTypeIcon({ viewType })}
+      {viewType !== VIEW_TYPE_CONSTANTS.NONE
+        ? getViewTypeIcon({ viewType, onClick, iconTextView })
+        : null}
     </View>
   );
 }

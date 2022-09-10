@@ -9,10 +9,16 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import Images from "../../../assets/images";
 
 // Constants
-import { HOME_SCREEN_CONSTANTS } from "../../constants/Strings";
+import {
+  HOME_SCREEN_CONSTANTS,
+  VIEW_TYPE_CONSTANTS,
+} from "../../constants/Strings";
 
 // Routes
-import { BASE_URL, CHARACTER_END_POINT } from "../../constants/routes";
+import { CHARACTER_END_POINT } from "../../constants/routes";
+
+// Icons
+import Entypo from "react-native-vector-icons/Entypo";
 
 // Colors
 import colors from "../../theme/colors";
@@ -29,6 +35,10 @@ import ListView from "../../components/list-view";
 import ActivityIndicator from "../../components/activity-indicator";
 import SearchBar from "../../components/search-bar";
 import Pagination from "../../components/pagination";
+import GridView from "../../components/grid-view";
+import headerRight from "../../components/headers/header-right";
+import { setDataViewType } from "../../redux/reducers/PersistReducer";
+import spacing from "../../theme/spacing";
 
 function HomeScreen({ navigation }) {
   // useDispatch
@@ -38,6 +48,7 @@ function HomeScreen({ navigation }) {
   const { loader, errorFetchingData, characterData } = useSelector(
     (state) => state.AppReducer
   );
+  const { viewType } = useSelector((state) => state.PersistReducer);
 
   // States
   const [pageIndex, setPageIndex] = useState(1);
@@ -46,6 +57,38 @@ function HomeScreen({ navigation }) {
     status: false,
     text: "",
   });
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () =>
+        headerRight({
+          navigation,
+          viewType,
+          onClick: () => {
+            viewType === VIEW_TYPE_CONSTANTS.LIST
+              ? dispatch(setDataViewType(VIEW_TYPE_CONSTANTS.GRID))
+              : dispatch(setDataViewType(VIEW_TYPE_CONSTANTS.LIST));
+          },
+          iconTextView: () => {
+            return viewType === VIEW_TYPE_CONSTANTS.LIST ? (
+              <>
+                <Entypo size={32} name="grid" style={styles.icon_style} />
+                <Text style={styles.text_style}>
+                  {VIEW_TYPE_CONSTANTS.GRID}
+                </Text>
+              </>
+            ) : (
+              <>
+                <Entypo size={32} name="list" style={styles.icon_style} />
+                <Text style={styles.text_style}>
+                  {VIEW_TYPE_CONSTANTS.LIST}
+                </Text>
+              </>
+            );
+          },
+        }),
+    });
+  }, [viewType]);
 
   useEffect(() => {
     // Api call to get rick and morty data
@@ -131,14 +174,26 @@ function HomeScreen({ navigation }) {
         ) : null}
 
         {/* List View */}
-        <ListView
-          data={characterData}
-          pageIndex={pageIndex}
-          setPageIndex={setPageIndex}
-          dispatch={dispatch}
-          searchBarText={searchBarText}
-          loader={loader}
-        />
+        {viewType === VIEW_TYPE_CONSTANTS.LIST ? (
+          <ListView
+            data={characterData}
+            pageIndex={pageIndex}
+            setPageIndex={setPageIndex}
+            dispatch={dispatch}
+            searchBarText={searchBarText}
+            loader={loader}
+          />
+        ) : (
+          <GridView
+            data={characterData}
+            pageIndex={pageIndex}
+            setPageIndex={setPageIndex}
+            dispatch={dispatch}
+            searchBarText={searchBarText}
+            loader={loader}
+            viewType={viewType}
+          />
+        )}
       </View>
     </SafeAreaView>
   );

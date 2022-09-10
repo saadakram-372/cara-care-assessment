@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: spacing.headerHidden,
-    paddingHorizontal: spacing.medium,
+    paddingHorizontal: spacing.smaller,
   },
   image_backgroud_style: {
     width: "100%",
@@ -34,6 +34,7 @@ export const styles = StyleSheet.create({
       }
     ),
   }),
+
   error_fetching_data_style: {
     fontSize: 16,
     fontWeight: "500",
@@ -41,5 +42,18 @@ export const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: spacing.textMidScreen,
     color: colors.burntUmber,
+  },
+
+  icon_style: {
+    marginLeft: spacing.medium,
+    alignSelf: "center",
+  },
+  text_style: {
+    color: colors.black,
+    fontWeight: "400",
+    fontSize: 12,
+    textAlign: "center",
+    alignSelf: "center",
+    marginLeft: spacing.smaller,
   },
 });
