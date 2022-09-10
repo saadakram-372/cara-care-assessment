@@ -8,8 +8,7 @@ import colors from "../../theme/colors";
 import Foundation from "react-native-vector-icons/Foundation";
 
 function Pagination(props) {
-  const { dispatch, currentPage, totalPages, next, previous, setPageIndex } =
-    props;
+  const { currentPage, totalPages, next, previous, setPageIndex } = props;
 
   /**
    * Function called when user presses previous icon for pagination

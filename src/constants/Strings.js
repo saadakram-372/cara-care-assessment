@@ -15,6 +15,10 @@ export const FILTER_SCREEN_CONSTANTS = {
   FILTER_STATUS_KEYS: ["Alive", "Dead", "Unknown"],
 };
 
+export const DETAILS_SCREEN_CONSTANTS = {
+  TITLE: "Character Details",
+};
+
 export const VIEW_TYPE_CONSTANTS = {
   LIST: "List",
   GRID: "Grid",

@@ -29,6 +29,7 @@ import { styles } from "./home-screen-styles";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getCharacterData } from "../../redux/thunks/AppThunk";
+import { setDataViewType } from "../../redux/reducers/PersistReducer";
 
 // Components
 import ListView from "../../components/list-view";
@@ -37,8 +38,6 @@ import SearchBar from "../../components/search-bar";
 import Pagination from "../../components/pagination";
 import GridView from "../../components/grid-view";
 import headerRight from "../../components/headers/header-right";
-import { setDataViewType } from "../../redux/reducers/PersistReducer";
-import spacing from "../../theme/spacing";
 
 function HomeScreen({ navigation }) {
   // useDispatch
@@ -162,7 +161,7 @@ function HomeScreen({ navigation }) {
         ) : null}
 
         {/* Pagination */}
-        {searchBarText.length === 0 ? (
+        {searchBarText.length === 0 && !loader ? (
           <Pagination
             currentPage={pageIndex}
             totalPages={characterData?.info?.pages}
@@ -179,8 +178,8 @@ function HomeScreen({ navigation }) {
             data={characterData}
             pageIndex={pageIndex}
             setPageIndex={setPageIndex}
-            dispatch={dispatch}
             searchBarText={searchBarText}
+            navigation={navigation}
             loader={loader}
           />
         ) : (
@@ -188,10 +187,10 @@ function HomeScreen({ navigation }) {
             data={characterData}
             pageIndex={pageIndex}
             setPageIndex={setPageIndex}
-            dispatch={dispatch}
             searchBarText={searchBarText}
             loader={loader}
             viewType={viewType}
+            navigation={navigation}
           />
         )}
       </View>

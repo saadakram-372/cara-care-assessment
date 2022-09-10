@@ -12,7 +12,13 @@ export const persistReducerSlice = createSlice({
       state.viewType = action.payload;
     },
     setFavouritesData: (state, action) => {
-      state.favouritesData = [...state.favouritesData, action.payload];
+      if (action.payload.action === "add") {
+        state.favouritesData = [...state.favouritesData, action.payload.item];
+      } else {
+        state.favouritesData = state.favouritesData.filter(
+          (obj) => obj?.id !== action.payload.item.id
+        );
+      }
     },
   },
 });

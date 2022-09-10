@@ -2,7 +2,6 @@ import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 
 // Icons
-import Entypo from "react-native-vector-icons/Entypo";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 // Constants
@@ -45,24 +44,11 @@ const getViewTypeIcon = ({ onClick, iconTextView }) => {
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onClick}>
       {iconTextView()}
-      {/* {viewType === VIEW_TYPE_CONSTANTS.LIST ? (
-        <>
-          <Entypo size={32} name="grid" style={styles.icon_style} />
-          <Text style={styles.text_style}>{VIEW_TYPE_CONSTANTS.GRID}</Text>
-        </>
-      ) : (
-        <>
-          <Entypo size={32} name="list" style={styles.icon_style} />
-          <Text style={styles.text_style}>{VIEW_TYPE_CONSTANTS.LIST}</Text>
-        </>
-      )} */}
     </TouchableOpacity>
   );
 };
 
 function headerRight({ navigation, viewType, onClick, iconTextView }) {
-  console.log("VIEWtyPE: ", viewType);
-
   return (
     <View style={styles.icon_view_style}>
       {getFilterIcon({ navigation })}

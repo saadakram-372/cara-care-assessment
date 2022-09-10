@@ -16,14 +16,19 @@ import colors from "../../theme/colors";
 
 // Components
 import FlatListComponent from "../flat-list";
-import VerticalDivider from "../dividers/vertical-divider";
-import spacing from "../../theme/spacing";
-import { SCREEN_WIDTH } from "../../utils";
-import { VIEW_TYPE_CONSTANTS } from "../../constants/Strings";
 import HorizontalDivider from "../dividers/horizontal-divider";
 
+// Spacing
+import spacing from "../../theme/spacing";
+
+// Utils
+import { SCREEN_WIDTH } from "../../utils";
+
+// Constants
+import { VIEW_TYPE_CONSTANTS } from "../../constants/Strings";
+
 function GridView(props) {
-  const { data, searchBarText, loader, viewType } = props;
+  const { data, searchBarText, loader, viewType, navigation } = props;
 
   /**
    * Function when an item from the list view is clicked
@@ -31,8 +36,10 @@ function GridView(props) {
    * @param {number} index
    * @returns
    */
-  const onClickedItem = ({ item, index }) => {
-    console.log("clicked: ", item, " with index: ", index);
+  const onClickedItem = ({ item }) => {
+    navigation.navigate("Details", {
+      item: item,
+    });
   };
 
   /**
@@ -56,7 +63,7 @@ function GridView(props) {
       >
         {/* Background Image */}
         <ImageBackground
-          resizeMode="stretch"
+          resizeMode="cover"
           imageStyle={{ borderRadius: 16 }}
           style={styles.image_background_style}
           source={{ uri: backgroundImage }}
@@ -107,6 +114,18 @@ function GridView(props) {
               <Image source={Images.specie} style={styles.icon_style} />
               <Text style={styles.icon_text_style}>{species}</Text>
             </View>
+
+            {/* Horizontal divider */}
+            <HorizontalDivider
+              width="100%"
+              height={2}
+              backgroundColor={colors.silverChalice}
+            />
+
+            {/* Third column */}
+            <View style={styles.icon_text_view_style}>
+              <Text style={styles.icon_text_style}>{first_seen_episode}</Text>
+            </View>
           </View>
         </ImageBackground>
       </TouchableOpacity>
@@ -144,7 +163,7 @@ const styles = StyleSheet.create({
     marginBottom: marginBottom,
   }),
   image_background_style: {
-    height: 200,
+    height: 280,
     width: SCREEN_WIDTH / 3.45,
     marginBottom: spacing.mediumPlus,
   },

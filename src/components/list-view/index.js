@@ -17,10 +17,14 @@ import colors from "../../theme/colors";
 // Components
 import FlatListComponent from "../flat-list";
 import VerticalDivider from "../dividers/vertical-divider";
+
+// Spacing
 import spacing from "../../theme/spacing";
 
 function ListView(props) {
-  const { data, searchBarText, loader } = props;
+  const { data, searchBarText, loader, navigation } = props;
+
+  console.log("props: ", data);
 
   /**
    * Function when an item from the list view is clicked
@@ -28,8 +32,10 @@ function ListView(props) {
    * @param {number} index
    * @returns
    */
-  const onClickedItem = ({ item, index }) => {
-    console.log("clicked: ", item, " with index: ", index);
+  const onClickedItem = ({ item }) => {
+    navigation.navigate("Details", {
+      item: item,
+    });
   };
 
   /**
