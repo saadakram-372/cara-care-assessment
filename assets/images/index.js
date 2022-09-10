@@ -6,4 +6,7 @@
 export default {
   logo: require("./logo/logo.png"),
   splash: require("./splash/splash.png"),
+  location: require("./location/location.png"),
+  specie: require("./specie/specie.png"),
+  status: require("./status/status.png"),
 };

@@ -3,15 +3,16 @@ import { View, Text, ImageBackground, ScrollView } from "react-native";
 
 // Libraries
 import { SafeAreaView } from "react-native-safe-area-context";
-
-// Icons
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
 // Images
 import Images from "../../../assets/images";
 
 // Constants
 import { HOME_SCREEN_CONSTANTS } from "../../constants/Strings";
+
+// Routes
+import { BASE_URL, CHARACTER_END_POINT } from "../../constants/routes";
 
 // Colors
 import colors from "../../theme/colors";
@@ -21,12 +22,12 @@ import { styles } from "./home-screen-styles";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
-import { getCharacterData } from "../../redux/thunks/appThunk";
+import { getCharacterData } from "../../redux/thunks/AppThunk";
 
 // Components
 import ListView from "../../components/list-view";
-import TextInput from "../../components/text-input";
 import ActivityIndicator from "../../components/activity-indicator";
+import SearchBar from "../../components/search-bar";
 
 function HomeScreen({ navigation }) {
   // useDispatch
@@ -47,8 +48,25 @@ function HomeScreen({ navigation }) {
 
   useEffect(() => {
     // Api call to get rick and morty data
-    dispatch(getCharacterData({ pageIndex }));
+    dispatch(
+      getCharacterData({
+        end_point: `${CHARACTER_END_POINT}?page=${pageIndex}`,
+      })
+    );
   }, [pageIndex]);
+
+  useEffect(() => {
+    if (searchBarText.length !== 0) {
+      searchItem();
+    } else {
+      // Api call to get rick and morty data
+      dispatch(
+        getCharacterData({
+          end_point: `${CHARACTER_END_POINT}?page=${pageIndex}`,
+        })
+      );
+    }
+  }, [searchBarText]);
 
   /**
    * Function to reset the search bar error values
@@ -60,6 +78,19 @@ function HomeScreen({ navigation }) {
     });
   };
 
+  /**
+   * Function to search item from the character data when user clicks the search icon
+   */
+  const searchItem = () => {
+    // Api call to get rick and morty data searched upon the name
+    // this function searches character-wise (order of the character doesn't matter)
+    dispatch(
+      getCharacterData({
+        end_point: `${CHARACTER_END_POINT}?name=${searchBarText.toString()}`,
+      })
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       {/* Loader */}
@@ -67,50 +98,34 @@ function HomeScreen({ navigation }) {
 
       {/* Search Bar */}
       <View style={styles.search_view_style}>
-        <TextInput
-          showErrorMsg={true}
-          mode="outlined"
-          text={searchBarText}
-          error={searchBarError}
-          label={HOME_SCREEN_CONSTANTS.SEARCH_BAR_LABEL}
-          onChangeText={(value) => {
-            resetSearchBarError();
-            setSearchBarText(value.toString());
-          }}
-          placeholder={HOME_SCREEN_CONSTANTS.SEARCH_BAR_PLACEHOLER}
-          rightIcon={() => <FontAwesome name="search" size={24} />}
-          rightIconPressed={() => {
-            if (searchBarText.length === 0) {
-              setSearchBarError({
-                status: true,
-                text: HOME_SCREEN_CONSTANTS.SEARCH_BAR_ERROR_TEXT,
-              });
-            } else {
-              // TODO
-              // Search from the data
-              resetSearchBarError();
-            }
-          }}
+        <SearchBar
+          searchItem={searchItem}
+          searchBarText={searchBarText}
+          searchBarError={searchBarError}
+          setSearchBarText={setSearchBarText}
+          setSearchBarError={setSearchBarError}
+          resetSearchBarError={resetSearchBarError}
         />
       </View>
 
       {/* List or Grid (based upon user's selection) of data */}
-      <View style={styles.data_view_style}>
-        <ScrollView bounces={true}>
-          {/* Error fetching data */}
-          {errorFetchingData && errorFetchingData.length !== 0 ? (
-            <Text style={styles.error_fetching_data_style}>
-              {errorFetchingData}
-            </Text>
-          ) : null}
+      <View style={styles.data_view_style(useBottomTabBarHeight())}>
+        {/* Error fetching data */}
+        {errorFetchingData && errorFetchingData.length !== 0 ? (
+          <Text style={styles.error_fetching_data_style}>
+            {errorFetchingData}
+          </Text>
+        ) : null}
 
-          {/* List View */}
-          <ListView
-            data={characterData}
-            pageIndex={pageIndex}
-            setPageIndex={setPageIndex}
-          />
-        </ScrollView>
+        {/* List View */}
+        <ListView
+          data={characterData}
+          pageIndex={pageIndex}
+          setPageIndex={setPageIndex}
+          dispatch={dispatch}
+          searchBarText={searchBarText}
+          loader={loader}
+        />
       </View>
     </SafeAreaView>
   );

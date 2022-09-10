@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCharacterData } from "../thunks/appThunk";
+import { getCharacterData } from "../thunks/AppThunk";
 
 export const appReducerSlice = createSlice({
   name: "AppReducer",

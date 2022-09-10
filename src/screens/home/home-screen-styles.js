@@ -1,5 +1,8 @@
 import { StyleSheet } from "react-native";
 
+// Libraries
+import { ifIphoneX } from "react-native-iphone-x-helper";
+
 // Colors
 import colors from "../../theme/colors";
 
@@ -19,9 +22,18 @@ export const styles = StyleSheet.create({
   search_view_style: {
     flex: 0.15,
   },
-  data_view_style: {
+  data_view_style: (bottomTabBarHeight) => ({
     flex: 0.85,
-  },
+    marginBottom: 32,
+    ...ifIphoneX(
+      {
+        marginBottom: bottomTabBarHeight - 32,
+      },
+      {
+        marginBottom: bottomTabBarHeight,
+      }
+    ),
+  }),
   error_fetching_data_style: {
     fontSize: 16,
     fontWeight: "500",

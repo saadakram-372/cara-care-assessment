@@ -8,3 +8,9 @@ export const HOME_SCREEN_CONSTANTS = {
   SEARCH_BAR_LABEL: "Search Character",
   SEARCH_BAR_ERROR_TEXT: "Please enter a valid string to search",
 };
+
+export const FILTER_SCREEN_CONSTANTS = {
+  TITLE: "Filters",
+  FIRST_SECTION_TITLE: "Status",
+  FILTER_STATUS_KEYS: ["Alive", "Dead", "Unknown"],
+};

@@ -31,6 +31,8 @@ const getTabBarVisibility = (route) => {
     return false;
   } else if (routeName === "Favourites") {
     return false;
+  } else if (routeName === "Filter") {
+    return false;
   } else {
     return true;
   }
