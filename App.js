@@ -28,13 +28,13 @@ const App = () => {
   Text.defaultProps = Text.defaultProps || {};
   Text.defaultProps.allowFontScaling = false;
 
-  // Making statusBar transparent so that screen look like full size
-  <StatusBar translucent backgroundColor="transparent" />;
-
   return (
     <Provider store={store}>
       <PaperProvider theme={theme}>
         <PersistGate loading={null} persistor={persistor}>
+          {/* Making statusBar transparent so that screen look like full size */}
+          <StatusBar translucent backgroundColor="transparent" />
+
           <AppNavigator />
         </PersistGate>
       </PaperProvider>

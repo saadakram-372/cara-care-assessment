@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ImageBackground, ScrollView } from "react-native";
+import { View, Text } from "react-native";
 
 // Libraries
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 
-// Images
-import Images from "../../../assets/images";
-
 // Constants
-import {
-  HOME_SCREEN_CONSTANTS,
-  VIEW_TYPE_CONSTANTS,
-} from "../../constants/Strings";
+import { VIEW_TYPE_CONSTANTS } from "../../constants/Strings";
 
 // Routes
 import { CHARACTER_END_POINT } from "../../constants/routes";
 
 // Icons
 import Entypo from "react-native-vector-icons/Entypo";
-
-// Colors
-import colors from "../../theme/colors";
 
 // Styles
 import { styles } from "./home-screen-styles";

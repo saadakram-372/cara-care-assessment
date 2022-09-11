@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+// Constants
 import { VIEW_TYPE_CONSTANTS } from "../../constants/Strings";
 
 export const persistReducerSlice = createSlice({

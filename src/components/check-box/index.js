@@ -2,6 +2,8 @@ import React from "react";
 
 // Libraries
 import { Checkbox } from "react-native-paper";
+
+// Colors
 import colors from "../../theme/colors";
 
 function CheckBox(props) {

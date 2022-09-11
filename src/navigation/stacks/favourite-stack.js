@@ -6,7 +6,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 // Screens
 import DetailsScreen from "../../screens/details";
 import FavouritesScreen from "../../screens/favourites";
-import HeaderLeft from "../../components/headers/header-left";
 
 const FavouriteStack = createStackNavigator();
 

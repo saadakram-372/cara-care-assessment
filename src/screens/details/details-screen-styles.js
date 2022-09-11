@@ -1,8 +1,5 @@
 import { StyleSheet } from "react-native";
 
-// Libraries
-import { ifIphoneX } from "react-native-iphone-x-helper";
-
 // Colors
 import colors from "../../theme/colors";
 
@@ -10,7 +7,7 @@ import colors from "../../theme/colors";
 import spacing from "../../theme/spacing";
 
 // Utils
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../utils";
+import { SCREEN_WIDTH } from "../../utils";
 
 export const styles = StyleSheet.create({
   container: {
@@ -39,7 +36,8 @@ export const styles = StyleSheet.create({
   },
   bottom_view_style: {
     flex: 0.7,
-    borderRadius: spacing.large,
+    borderTopLeftRadius: spacing.large,
+    borderTopRightRadius: spacing.large,
     paddingTop: spacing.mediumPlus,
     backgroundColor: colors.darkBlue,
   },

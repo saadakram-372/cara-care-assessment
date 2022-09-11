@@ -1,6 +1,10 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
+import { TouchableOpacity, StyleSheet, Text } from "react-native";
+
+// Colors
 import colors from "../../theme/colors";
+
+// Spacing
 import spacing from "../../theme/spacing";
 
 function Button(props) {

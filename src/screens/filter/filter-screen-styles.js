@@ -1,8 +1,6 @@
 import { StyleSheet } from "react-native";
 
-// Libraries
-import { ifIphoneX } from "react-native-iphone-x-helper";
-import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import { Platform } from "react-native";
 
 // Colors
 import colors from "../../theme/colors";

@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import AsyncStorage from "@react-native-community/async-storage";
-import { persistReducer, persistStore } from "redux-persist";
 import rootReducers from "./reducers/rootReducer";
+import { createStore, applyMiddleware } from "redux";
+import { persistReducer, persistStore } from "redux-persist";
+
+// Libraries
+import AsyncStorage from "@react-native-community/async-storage";
 
 const persistConfig = {
   key: "root",

@@ -1,8 +1,5 @@
 import React from "react";
 
-// Icons
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-
 // Constants
 import { HOME_SCREEN_CONSTANTS } from "../../constants/Strings";
 

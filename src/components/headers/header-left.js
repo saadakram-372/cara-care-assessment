@@ -3,6 +3,8 @@ import { Image, StyleSheet } from "react-native";
 
 // Images
 import Images from "../../../assets/images";
+
+// Colors
 import colors from "../../theme/colors";
 
 // Spacing

@@ -3,7 +3,11 @@ import { StyleSheet, Text } from "react-native";
 
 // Libraries
 import { TextInput } from "react-native-paper";
+
+// Colors
 import colors from "../../theme/colors";
+
+// Spacing
 import spacing from "../../theme/spacing";
 
 function Input(props) {

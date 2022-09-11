@@ -1,7 +1,10 @@
 import React from "react";
-
 import { FlatList, View, Text, StyleSheet } from "react-native";
+
+// Colors
 import colors from "../../theme/colors";
+
+// Spacing
 import spacing from "../../theme/spacing";
 
 function FlatListComponent(props) {

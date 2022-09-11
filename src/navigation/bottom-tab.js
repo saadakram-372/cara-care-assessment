@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 // Libraries
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
@@ -11,7 +11,11 @@ import HomeStackScreens from "./stacks/home-stack";
 
 // Icons
 import Entypo from "react-native-vector-icons/Entypo";
+
+// Colors
 import colors from "../theme/colors";
+
+// Components
 import HeaderLeft from "../components/headers/header-left";
 
 /**

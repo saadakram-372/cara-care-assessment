@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, ImageBackground, ScrollView, Image } from "react-native";
 
 // Libraries
@@ -9,7 +9,6 @@ import { DETAILS_SCREEN_CONSTANTS } from "../../constants/Strings";
 
 // Icons
 import AntDesign from "react-native-vector-icons/AntDesign";
-import Entypo from "react-native-vector-icons/Entypo";
 
 // Styles
 import { styles } from "./details-screen-styles";

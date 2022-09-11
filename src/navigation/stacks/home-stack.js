@@ -7,9 +7,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../../screens/home";
 import DetailsScreen from "../../screens/details";
 import FilterScreen from "../../screens/filter";
+
+// Components
 import HeaderLeft from "../../components/headers/header-left";
 import headerRight from "../../components/headers/header-right";
-import colors from "../../theme/colors";
+
+// Constants
 import { VIEW_TYPE_CONSTANTS } from "../../constants/Strings";
 
 const HomeStack = createStackNavigator();
