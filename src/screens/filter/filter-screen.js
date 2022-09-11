@@ -22,11 +22,16 @@ import CheckBox from "../../components/check-box";
 import HorizontalDivider from "../../components/dividers/horizontal-divider";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getCharacterData } from "../../redux/thunks/AppThunk";
+import { setCheckedFilter } from "../../redux/reducers/PersistReducer";
 
 function FilterScreen({ navigation }) {
+  // useDispatch
   const dispatch = useDispatch();
+
+  // useSelector
+  const { checkedFilter } = useSelector((state) => state.PersistReducer);
 
   const [checked, setChecked] = useState({
     status: {
@@ -51,7 +56,8 @@ function FilterScreen({ navigation }) {
    */
   const onClickedApply = () => {
     // Logic to get the key of status if value is true
-    const filtered_Key = getTrueValueKeys(checked.status);
+    // const filtered_Key = getTrueValueKeys(checked.status);
+    const filtered_Key = getTrueValueKeys(checkedFilter.status);
 
     // Api call to get filtered rick and morty data
     dispatch(
@@ -101,12 +107,9 @@ function FilterScreen({ navigation }) {
             <View key={index} style={styles.text_check_box_view_style}>
               <Text style={styles.section_text_style}>{value}</Text>
               <CheckBox
-                checked={checked?.status[value]}
+                checked={checkedFilter?.status[value]}
                 setChecked={() => {
-                  setChecked({
-                    ...checked,
-                    status: { [value]: !checked?.status[value] },
-                  });
+                  dispatch(setCheckedFilter({ value: value }));
                 }}
               />
             </View>

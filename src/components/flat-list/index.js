@@ -9,6 +9,7 @@ function FlatListComponent(props) {
 
   return (
     <FlatList
+      bounces={false}
       data={data}
       numColumns={numCols}
       renderItem={renderItem}

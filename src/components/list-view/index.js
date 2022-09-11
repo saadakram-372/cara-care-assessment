@@ -24,8 +24,6 @@ import spacing from "../../theme/spacing";
 function ListView(props) {
   const { data, searchBarText, loader, navigation } = props;
 
-  console.log("props: ", data);
-
   /**
    * Function when an item from the list view is clicked
    * @param {object} item
@@ -122,20 +120,17 @@ function ListView(props) {
   };
 
   return (
-    <View>
-      {/* List View */}
-      <View
-        style={styles.flat_list_view_style(
-          searchBarText.length == 0 ? spacing.huge : 0
-        )}
-      >
-        <FlatListComponent
-          data={data?.results}
-          listEmptyText={loader ? " " : "No data found"}
-          renderItem={renderItem}
-          numCols={0}
-        />
-      </View>
+    <View
+      style={styles.flat_list_view_style(
+        searchBarText.length === 0 ? spacing.huge : 0
+      )}
+    >
+      <FlatListComponent
+        data={data}
+        listEmptyText={loader ? " " : "No data found"}
+        renderItem={renderItem}
+        numCols={0}
+      />
     </View>
   );
 }

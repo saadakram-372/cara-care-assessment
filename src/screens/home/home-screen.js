@@ -29,7 +29,10 @@ import { styles } from "./home-screen-styles";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import { getCharacterData } from "../../redux/thunks/AppThunk";
-import { setDataViewType } from "../../redux/reducers/PersistReducer";
+import {
+  resetPersistValues,
+  setDataViewType,
+} from "../../redux/reducers/PersistReducer";
 
 // Components
 import ListView from "../../components/list-view";
@@ -56,6 +59,10 @@ function HomeScreen({ navigation }) {
     status: false,
     text: "",
   });
+
+  useEffect(() => {
+    dispatch(resetPersistValues());
+  }, []);
 
   useEffect(() => {
     navigation.setOptions({
@@ -135,66 +142,64 @@ function HomeScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <>
       {/* Loader */}
       <ActivityIndicator state={loader} />
 
-      {/* Search Bar */}
-      <View style={styles.search_view_style}>
-        <SearchBar
-          searchItem={searchItem}
-          searchBarText={searchBarText}
-          searchBarError={searchBarError}
-          setSearchBarText={setSearchBarText}
-          setSearchBarError={setSearchBarError}
-          resetSearchBarError={resetSearchBarError}
-        />
-      </View>
-
-      {/* List or Grid (based upon user's selection) of data */}
-      <View style={styles.data_view_style(useBottomTabBarHeight())}>
-        {/* Error fetching data */}
-        {errorFetchingData && errorFetchingData.length !== 0 ? (
-          <Text style={styles.error_fetching_data_style}>
-            {errorFetchingData}
-          </Text>
-        ) : null}
-
-        {/* Pagination */}
-        {searchBarText.length === 0 && !loader ? (
-          <Pagination
-            currentPage={pageIndex}
-            totalPages={characterData?.info?.pages}
-            next={characterData?.info?.next}
-            previous={characterData?.info?.prev}
-            setPageIndex={setPageIndex}
-            dispatch={dispatch}
-          />
-        ) : null}
-
-        {/* List View */}
-        {viewType === VIEW_TYPE_CONSTANTS.LIST ? (
-          <ListView
-            data={characterData}
-            pageIndex={pageIndex}
-            setPageIndex={setPageIndex}
+      <SafeAreaView style={styles.container}>
+        {/* Search Bar */}
+        <View style={styles.search_view_style}>
+          <SearchBar
+            searchItem={searchItem}
             searchBarText={searchBarText}
-            navigation={navigation}
-            loader={loader}
+            searchBarError={searchBarError}
+            setSearchBarText={setSearchBarText}
+            setSearchBarError={setSearchBarError}
+            resetSearchBarError={resetSearchBarError}
           />
-        ) : (
-          <GridView
-            data={characterData}
-            pageIndex={pageIndex}
-            setPageIndex={setPageIndex}
-            searchBarText={searchBarText}
-            loader={loader}
-            viewType={viewType}
-            navigation={navigation}
-          />
-        )}
-      </View>
-    </SafeAreaView>
+        </View>
+
+        {/* List or Grid (based upon user's selection) of data */}
+        <View style={styles.data_view_style(useBottomTabBarHeight())}>
+          {/* Error fetching data */}
+          {errorFetchingData && errorFetchingData.length !== 0 ? (
+            <Text style={styles.error_fetching_data_style}>
+              {errorFetchingData}
+            </Text>
+          ) : null}
+
+          {/* Pagination */}
+          {searchBarText.length === 0 && !loader ? (
+            <Pagination
+              currentPage={pageIndex}
+              totalPages={characterData?.info?.pages}
+              next={characterData?.info?.next}
+              previous={characterData?.info?.prev}
+              setPageIndex={setPageIndex}
+              dispatch={dispatch}
+            />
+          ) : null}
+
+          {/* List View */}
+          {viewType === VIEW_TYPE_CONSTANTS.LIST ? (
+            <ListView
+              data={characterData?.results}
+              searchBarText={searchBarText}
+              navigation={navigation}
+              loader={loader}
+            />
+          ) : (
+            <GridView
+              data={characterData?.results}
+              searchBarText={searchBarText}
+              loader={loader}
+              viewType={viewType}
+              navigation={navigation}
+            />
+          )}
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 

@@ -29,11 +29,7 @@ const getTabBarVisibility = (route) => {
   // If-Else statements to hide-show bottom tab for specific screens
   if (routeName === "Details") {
     return false;
-  } else if (routeName === "Favourites") {
-    return false;
   } else if (routeName === "Filter") {
-    return false;
-  } else if (routeName === "Favourites") {
     return false;
   } else {
     return true;

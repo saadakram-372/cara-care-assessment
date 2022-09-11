@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   },
   close_icon_title_view_style: {
     position: "absolute",
-    right: spacing.smaller,
+    left: spacing.smaller,
     zIndex: 100,
   },
   image_background_style: {

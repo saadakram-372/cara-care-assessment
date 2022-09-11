@@ -6,6 +6,13 @@ export const persistReducerSlice = createSlice({
   initialState: {
     viewType: VIEW_TYPE_CONSTANTS.LIST,
     favouritesData: [],
+    checkedFilter: {
+      status: {
+        Alive: false,
+        Unknown: false,
+        Dead: false,
+      },
+    },
   },
   reducers: {
     setDataViewType: (state, action) => {
@@ -20,9 +27,31 @@ export const persistReducerSlice = createSlice({
         );
       }
     },
+    setCheckedFilter: (state, action) => {
+      state.checkedFilter = {
+        ...state.checkedFilter,
+        status: {
+          [action.payload.value]:
+            !state.checkedFilter?.status[action.payload.value],
+        },
+      };
+    },
+    resetPersistValues: (state) => {
+      state.checkedFilter = {
+        status: {
+          Alive: false,
+          Unknown: false,
+          Dead: false,
+        },
+      };
+    },
   },
 });
 
-export const { setDataViewType, setFavouritesData } =
-  persistReducerSlice.actions;
+export const {
+  setDataViewType,
+  setFavouritesData,
+  setCheckedFilter,
+  resetPersistValues,
+} = persistReducerSlice.actions;
 export default persistReducerSlice.reducer;

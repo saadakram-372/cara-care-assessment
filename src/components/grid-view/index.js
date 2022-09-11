@@ -143,7 +143,7 @@ function GridView(props) {
         )}
       >
         <FlatListComponent
-          data={data?.results}
+          data={data}
           listEmptyText={loader ? " " : "No data found"}
           renderItem={renderItem}
           numCols={3}
