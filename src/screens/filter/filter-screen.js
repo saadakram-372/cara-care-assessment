@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text } from "react-native";
 
 // Constants
@@ -33,14 +33,6 @@ function FilterScreen({ navigation }) {
   // useSelector
   const { checkedFilter } = useSelector((state) => state.PersistReducer);
 
-  const [checked, setChecked] = useState({
-    status: {
-      Alive: false,
-      Unknown: false,
-      Dead: false,
-    },
-  });
-
   /**
    * Function to return keys of true values from object
    */
@@ -56,7 +48,6 @@ function FilterScreen({ navigation }) {
    */
   const onClickedApply = () => {
     // Logic to get the key of status if value is true
-    // const filtered_Key = getTrueValueKeys(checked.status);
     const filtered_Key = getTrueValueKeys(checkedFilter.status);
 
     // Api call to get filtered rick and morty data
