@@ -11,10 +11,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import Images from "../../../assets/images";
 
 // Constants
-import {
-  HOME_SCREEN_CONSTANTS,
-  VIEW_TYPE_CONSTANTS,
-} from "../../constants/Strings";
+import { VIEW_TYPE_CONSTANTS } from "../../constants/Strings";
 
 // Routes
 import { CHARACTER_END_POINT } from "../../constants/routes";
@@ -28,22 +25,36 @@ import Entypo from "react-native-vector-icons/Entypo";
 // Colors
 import colors from "../../theme/colors";
 
-// Components
-import ListView from "../../components/list-view";
+// Styles
 import { styles } from "./favourites-screen-styles";
 
+// Components
+import ListView from "../../components/list-view";
+import GridView from "../../components/grid-view";
+
 function FavouritesScreen({ navigation }) {
-  const { favouritesData } = useSelector((state) => state.PersistReducer);
+  const { favouritesData, viewType } = useSelector(
+    (state) => state.PersistReducer
+  );
 
   return (
     <View style={styles.container}>
-      {/* List View */}
-      <ListView
-        data={favouritesData}
-        searchBarText={""}
-        navigation={navigation}
-        loader={false}
-      />
+      {viewType === VIEW_TYPE_CONSTANTS.LIST ? (
+        <ListView
+          data={favouritesData}
+          searchBarText={""}
+          navigation={navigation}
+          loader={false}
+        />
+      ) : (
+        <GridView
+          data={favouritesData}
+          searchBarText={""}
+          loader={false}
+          viewType={viewType}
+          navigation={navigation}
+        />
+      )}
     </View>
   );
 }
