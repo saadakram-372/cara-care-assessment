@@ -44,8 +44,6 @@ function FilterScreen({ navigation }) {
   // useSelector
   const { checkedFilter } = useSelector((state) => state.PersistReducer);
 
-  console.log("checkedFilyter: ", checkedFilter);
-
   useEffect(() => {
     setChecked(checkedFilter);
   }, []);
