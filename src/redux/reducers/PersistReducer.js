@@ -1,3 +1,7 @@
+/**
+ * This file has all of the reducers that are being used in the app and we need to persist their values.
+ */
+
 import { createSlice } from "@reduxjs/toolkit";
 
 // Constants

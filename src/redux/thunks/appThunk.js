@@ -1,3 +1,9 @@
+/**
+ * This is a middleware that uses thunks for the api calls. The getCharacterData thunk function here is used to fetch
+ * the initial data from the end point and later helps us while searching and filtering data as well. All you need is to
+ * pass the appropriate payload; having the appropriate endpoint/link to be appended with the BASE_URL.
+ */
+
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // Routes

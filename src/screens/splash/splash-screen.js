@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Image, View, Text } from "react-native";
 
 // Images
@@ -11,11 +11,15 @@ import { styles } from "./splash-screen-styles";
 import { SPLASH_SCREEN_CONSTANTS } from "../../constants/Strings";
 
 function SplashScreen({ navigation }) {
+  /**
+   * Function to show the splash screen for about 2 sec
+   */
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("bottomTab");
     }, 2000);
   });
+
   return (
     <View style={styles.container}>
       {/* Logo */}

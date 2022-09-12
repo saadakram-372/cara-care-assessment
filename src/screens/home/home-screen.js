@@ -51,10 +51,16 @@ function HomeScreen({ navigation }) {
     text: "",
   });
 
+  /**
+   *  useEffect to clear persisted value for filtering options when the user first loads the home page
+   */
   useEffect(() => {
     dispatch(resetPersistValues());
   }, []);
 
+  /**
+   * useEffect to update the top right list/Grid icon when the viewType of the app changes
+   */
   useEffect(() => {
     navigation.setOptions({
       headerRight: () =>
@@ -87,6 +93,10 @@ function HomeScreen({ navigation }) {
     });
   }, [viewType]);
 
+  /**
+   * Calling the rick and morty api whenever user clicks to go to next/previous page in pagination
+   * with the incremented/decremented pageIndex to show data from.
+   */
   useEffect(() => {
     // Api call to get rick and morty data
     dispatch(
@@ -96,6 +106,9 @@ function HomeScreen({ navigation }) {
     );
   }, [pageIndex]);
 
+  /**
+   * useEffect that searches through the rick and morty api data while the user is typing on the search bar
+   */
   useEffect(() => {
     if (searchBarText.length !== 0) {
       searchItem();
@@ -171,7 +184,7 @@ function HomeScreen({ navigation }) {
             />
           ) : null}
 
-          {/* List View */}
+          {/* List View OR Grid view */}
           {viewType === VIEW_TYPE_CONSTANTS.LIST ? (
             <ListView
               data={characterData?.results}

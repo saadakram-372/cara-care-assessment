@@ -16,6 +16,9 @@ import colors from "../../theme/colors";
 // Styles
 import { styles } from "./filter-screen-styles";
 
+// Utils
+import { getTrueValueKeys } from "../../utils";
+
 // Components
 import Button from "../../components/button";
 import CheckBox from "../../components/check-box";
@@ -32,16 +35,6 @@ function FilterScreen({ navigation }) {
 
   // useSelector
   const { checkedFilter } = useSelector((state) => state.PersistReducer);
-
-  /**
-   * Function to return keys of true values from object
-   */
-  const getTrueValueKeys = (obj) => {
-    const keys = Object.keys(obj);
-    return keys.filter((key) => {
-      return obj[key];
-    })[0];
-  };
 
   /**
    * Function when apply button is clicked to apply the selected filters

@@ -1,3 +1,8 @@
+/**
+ * This file has all of the reducers that are being used in the app and we don't need to persist their values. The
+ * extra reducers are used to be binded with the pending, fulfilled and rejected state of the api calls.
+ */
+
 import { createSlice } from "@reduxjs/toolkit";
 import { getCharacterData } from "../thunks/AppThunk";
 

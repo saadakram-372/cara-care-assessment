@@ -3,9 +3,7 @@
  * If you need to perform any of the above action you can call any of the following function and pass in following parameters:
  * @param {string} url
  * @param {string} link
- * @param {string} params
- * @param {string} accessToken
- * @returns
+ * @returns {object} response
  */
 
 export const apiGet = async (url, link) => {
