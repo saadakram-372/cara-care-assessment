@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 
 // Constants
@@ -33,15 +33,29 @@ function FilterScreen({ navigation }) {
   // useDispatch
   const dispatch = useDispatch();
 
+  const [checked, setChecked] = useState({
+    status: {
+      Alive: false,
+      Unknown: false,
+      Dead: false,
+    },
+  });
+
   // useSelector
   const { checkedFilter } = useSelector((state) => state.PersistReducer);
+
+  console.log("checkedFilyter: ", checkedFilter);
+
+  useEffect(() => {
+    setChecked(checkedFilter);
+  }, []);
 
   /**
    * Function when apply button is clicked to apply the selected filters
    */
   const onClickedApply = () => {
     // Logic to get the key of status if value is true
-    const filtered_Key = getTrueValueKeys(checkedFilter.status);
+    const filtered_Key = getTrueValueKeys(checked.status);
 
     // Api call to get filtered rick and morty data
     dispatch(
@@ -49,6 +63,9 @@ function FilterScreen({ navigation }) {
         end_point: `${CHARACTER_END_POINT}?status=${filtered_Key}`,
       })
     );
+
+    // Setting the selected status in redux
+    dispatch(setCheckedFilter({ value: filtered_Key }));
 
     // Navigate to previous home page
     navigation.pop();
@@ -91,9 +108,12 @@ function FilterScreen({ navigation }) {
             <View key={index} style={styles.text_check_box_view_style}>
               <Text style={styles.section_text_style}>{value}</Text>
               <CheckBox
-                checked={checkedFilter?.status[value]}
+                checked={checked?.status[value]}
                 setChecked={() => {
-                  dispatch(setCheckedFilter({ value: value }));
+                  setChecked({
+                    ...checked,
+                    status: { [value]: !checked?.status[value] },
+                  });
                 }}
               />
             </View>
@@ -103,7 +123,16 @@ function FilterScreen({ navigation }) {
 
       {/* Button View */}
       <View style={styles.button_view_style}>
-        <Button text="Apply" onPress={() => onClickedApply()} />
+        <Button
+          button_style={{
+            opacity: getTrueValueKeys(checked?.status) === undefined ? 0.2 : 1,
+          }}
+          disabled={
+            getTrueValueKeys(checked?.status) === undefined ? true : false
+          }
+          text="Apply"
+          onPress={() => onClickedApply()}
+        />
       </View>
     </View>
   );

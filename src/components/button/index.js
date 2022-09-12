@@ -8,12 +8,13 @@ import colors from "../../theme/colors";
 import spacing from "../../theme/spacing";
 
 function Button(props) {
-  const { text, onPress } = props;
+  const { text, onPress, disabled, button_style } = props;
   return (
     <TouchableOpacity
+      disabled={disabled ? true : false}
       activeOpacity={0.7}
       onPress={onPress}
-      style={styles.container}
+      style={[styles.container, button_style]}
     >
       <Text style={styles.button_text_style}>{text}</Text>
     </TouchableOpacity>
